@@ -1,0 +1,7 @@
+@import "../../themes.scss";
+.header-container {
+    background-color: $header-color;
+    padding: 0.5em 1em;
+    display: flex;
+    justify-content: space-between;
+}

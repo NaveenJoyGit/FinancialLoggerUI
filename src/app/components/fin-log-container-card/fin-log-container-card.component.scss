@@ -1,0 +1,6 @@
+@import "../../themes.scss";
+.container {
+    min-height: 2em;
+    min-width: 5em;
+    box-shadow: 0px 0px 10px $box-shadow-color;
+}
