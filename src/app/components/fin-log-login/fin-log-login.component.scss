@@ -1,0 +1,29 @@
+@import "../../themes.scss";
+.login-container {
+    padding: 3em;
+}
+
+.login-header {
+    font-size: $sub-header-font-size;
+}
+
+.form-container {
+    padding: 1em 0em;
+    .input-label-container {
+        padding: 0.25em 0em;
+        &>div {
+            padding: 0.5em 0em;
+        }
+    }
+    .text-input {
+        border: none;
+        box-shadow: 0px 0px 5px $box-shadow-color;
+        border-radius: 3px;
+        width: 80%;
+        height: 1.5em;
+    }
+    .button {
+        position: absolute;
+        padding: 1em 0px;
+    }
+}

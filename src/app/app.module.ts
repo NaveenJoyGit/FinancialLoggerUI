@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http' 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +10,6 @@ import { FinLogButtonComponent } from './components/fin-log-button/fin-log-butto
 import { FinLogLoginComponent } from './components/fin-log-login/fin-log-login.component';
 import { FinLogHeaderComponent } from './components/fin-log-header/fin-log-header.component';
 import { FinLogContainerCardComponent } from './components/fin-log-container-card/fin-log-container-card.component';
-import { FinLogInputComponent } from './components/fin-log-input/fin-log-input.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { FinLogInputComponent } from './components/fin-log-input/fin-log-input.c
     FinLogButtonComponent,
     FinLogLoginComponent,
     FinLogHeaderComponent,
-    FinLogContainerCardComponent,
-    FinLogInputComponent
+    FinLogContainerCardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,12 +1,21 @@
 <app-fin-log-container-card class="login-container-card" [styleObj]="cardStyle">
-    <form action="">
-        <div>
-            <label>username</label>
-            <app-fin-log-input [inputType]="'text'"></app-fin-log-input>
+    <div class="login-container">
+        <div class="login-header">
+            Login
         </div>
-        <div>
-            <label>password</label>
-            <app-fin-log-input [inputType]="'text'"></app-fin-log-input>
+        <div class="form-container">
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+                <div class="input-label-container">
+                    <div>username</div>
+                    <input class="text-input" type="text" formControlName="username">
+                </div>
+                <div class="input-label-container">
+                    <div>password</div>
+                    <input class="text-input" type="password" formControlName="password">
+                </div>
+                <app-fin-log-button class="button">Login</app-fin-log-button>
+            </form>
         </div>
-    </form>
+    </div>
 </app-fin-log-container-card>
+{{text}}
