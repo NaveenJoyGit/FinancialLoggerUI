@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-fin-log-button',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinLogButtonComponent implements OnInit {
 
+  @Output() clicked  = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  btnClicked() {
+    this.clicked.emit();
   }
 
 }

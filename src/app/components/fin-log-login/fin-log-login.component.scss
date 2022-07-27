@@ -1,6 +1,6 @@
 @import "../../themes.scss";
 .login-container {
-    padding: 3em;
+    padding: 1em;
 }
 
 .login-header {
@@ -8,6 +8,7 @@
 }
 
 .form-container {
+    margin: auto;
     padding: 1em 0em;
     .input-label-container {
         padding: 0.25em 0em;
@@ -17,6 +18,7 @@
     }
     .text-input {
         border: none;
+        padding: 0.5em;
         box-shadow: 0px 0px 5px $box-shadow-color;
         border-radius: 3px;
         width: 80%;

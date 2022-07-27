@@ -3,6 +3,8 @@ import { FinancialLoggerUser } from 'src/app/models/FinancialUser';
 import { FormGroup, FormControl } from '@angular/forms'
 import { UserAuthService } from 'src/app/service/user-auth.service';
 import { first } from 'rxjs';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fin-log-login',
@@ -10,6 +12,8 @@ import { first } from 'rxjs';
   styleUrls: ['./fin-log-login.component.scss']
 })
 export class FinLogLoginComponent implements OnInit {
+
+  isLoggedIn: boolean = false;
 
   cardStyle: any;
   text:any;
@@ -23,10 +27,15 @@ export class FinLogLoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private authService: UserAuthService) { }
+  constructor(private authService: UserAuthService, 
+    private tokenService: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
     this.intializeStyle();
+    if(this.tokenService.getToken()) {
+        this.isLoggedIn = true;
+        this.router.navigateByUrl('/home')
+    }
   }
   
   intializeStyle() {
@@ -51,7 +60,9 @@ export class FinLogLoginComponent implements OnInit {
   }
 
   successfullLogin(response:any) {
+    this.tokenService.saveToken(response.responseData);
     console.log(response)
+    this.router.navigateByUrl('/home');
   }
  
 }

@@ -6,5 +6,7 @@
     border-radius: 3px;
     &:hover {
         background-color: $button-hover-color;
+        box-shadow: 0px 0px 1em $box-shadow-color;
     }
+    box-shadow: 0px 0px 0.5em $box-shadow-color;
 }
