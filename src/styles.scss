@@ -1,10 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "app/themes.scss";
+
 body {
     margin: 0px;
     font-family: $common-font;
     font-size: $common-font-size;
+    background-color: $background-color;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* Material global styles */
+
+//placeholder color
+
+.mat-form-field-label {
+    color: $placeholder-color  !important;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+}
+
+/* Font color */
+input.mat-input-element {
+    color: white;
+}

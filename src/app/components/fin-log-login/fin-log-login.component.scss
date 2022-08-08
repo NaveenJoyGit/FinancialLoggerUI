@@ -1,6 +1,8 @@
 @import "../../themes.scss";
 .login-container {
     padding: 1em;
+    background-color: $card-bg-color;
+    height: 100%;
 }
 
 .login-header {

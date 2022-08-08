@@ -1,32 +1,24 @@
-<p>
-    <mat-form-field appearance="legacy">
-        <mat-label>Legacy form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="standard">
-        <mat-label>Standard form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="fill">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
+<div class="">
+    <form [formGroup]="addTradeForm" (ngSubmit)="onFormSubmit()" class="form-container add-trade-form-container">
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Share Name</mat-label>
+            <input matInput formControlName="stockName">
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Quantity</mat-label>
+            <input type="number" matInput formControlName="buyQuantity">
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Buy Price</mat-label>
+            <input type="number" matInput formControlName="buyPrice">
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Buy Date</mat-label>
+            <input type="date" matInput>
+        </mat-form-field>
+        <button>Submit</button>
+    </form>
+</div>
