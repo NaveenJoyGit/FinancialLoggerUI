@@ -3,6 +3,7 @@
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Share Name</mat-label>
             <input matInput formControlName="stockName">
+            <mat-error *ngIf="!stockName.errors?.isValidStockName">Please enter a valid stock name</mat-error>
         </mat-form-field>
     
         <mat-form-field class="full-width" appearance="outline">
