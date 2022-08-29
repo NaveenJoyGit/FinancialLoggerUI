@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorService } from 'src/app/validators/custom-validator.service';
+import { AddTradeResponse } from 'src/app/models/model';
+import { Router } from '@angular/router';
+import { NseDataService } from 'src/app/service/nse-data.service';
+import { distinctUntilChanged, Subscription } from 'rxjs';
+import { StockUtils } from 'src/app/helpers/StockUtils';
 
 @Component({
   selector: 'app-add-trade',
@@ -10,7 +15,14 @@ import { CustomValidatorService } from 'src/app/validators/custom-validator.serv
 export class AddTradeComponent implements OnInit {
 
   addTradeForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private customValidator: CustomValidatorService, ) { }
+  addTradeResponse!: AddTradeResponse
+  tradeTypes: any;
+  subscription: Subscription = new Subscription();
+
+  constructor(private formBuilder: FormBuilder,
+    private customValidator: CustomValidatorService,
+    private router: Router,
+    private tradeService: NseDataService) { }
 
   ngOnInit(): void {
     this.addTradeForm = this.formBuilder.group({
@@ -22,18 +34,85 @@ export class AddTradeComponent implements OnInit {
       buyPrice: ['', Validators.required],
       buyQuantity: ['', Validators.required],
       tradeType: ['', Validators.required],
+      buyDate: [''],
       tradeDescription: ['']
-    })
+    });
 
+    this.tradeTypes = ['INTRADAY_BUY', 'INTRADAY_SELL',
+      'SWING', 'FUTURES_BUY', 'FUTURES_SELL',
+      'OPTIONS_BUY', 'OPTIONS_SELL']
+
+    this.onStockNameChange();
+
+  }
+
+  onStockNameChange() {
+    this.addTradeForm.valueChanges.subscribe({
+      next: data => {
+        const stockControl = this.addTradeForm.get('stockName');
+        if (stockControl?.valid && this.buyPrice === '') {
+          console.log('Now I can call trigger method...')
+          this.triggerBuyPrice()
+        }
+      },
+      error: err => console.log(err)
+    }
+    )
+  }
+
+  triggerBuyPrice() {
+    this.tradeService.tradeDetails.pipe(distinctUntilChanged()).subscribe({
+      next: data => {
+        console.log(data)
+        const currentPrice = StockUtils.parseAndReturnNumber(data.responseData.currentPrice)
+        this.addTradeForm.get('buyPrice')?.setValue(currentPrice)
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  get buyPrice() {
+    return this.addTradeForm.controls['buyPrice']?.value;
+  }
+
+  get buyQuantity() {
+    return this.addTradeForm.controls['buyQuantity'].value;
+  }
+
+  get tradeType() {
+    return this.addTradeForm.controls['tradeType'].value;
+  }
+
+  get tradeDescription() {
+    return this.addTradeForm.controls['tradeDescription'].value;
   }
 
   get stockName() {
-    return this.addTradeForm.get('stockName')?.value;
+    return this.addTradeForm.controls['stockName'].value;
   }
 
   onFormSubmit() {
-    console.log(this.addTradeForm.get('stockName')?.valid)
-    console.log('Form Submitted');
+    this.sendResponse();
+  }
+
+  sendResponse() {
+    this.addTradeResponse = {
+      stockName: this.stockName,
+      buyQuantity: this.buyQuantity,
+      buyPrice: this.buyPrice,
+      tradeType: this.tradeType,
+      tradeDescription: this.tradeDescription
+    }
+
+    console.log(this.addTradeResponse);
+    this.tradeService.addTrade(this.addTradeResponse).subscribe({
+      next: data => {
+        console.log(data.responseMessage)
+        this.router.navigateByUrl('/home')
+      },
+      error: err => console.log(err)
+    });
+
   }
 
 }

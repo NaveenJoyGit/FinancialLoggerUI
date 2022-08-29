@@ -1,25 +1,40 @@
-<div class="">
+<div class="container">
     <form [formGroup]="addTradeForm" (ngSubmit)="onFormSubmit()" class="form-container add-trade-form-container">
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Share Name</mat-label>
-            <input matInput formControlName="stockName">
-            <mat-error *ngIf="!stockName.errors?.isValidStockName">Please enter a valid stock name</mat-error>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Share Name</mat-label>
+                <input matInput formControlName="stockName">
+                <mat-error *ngIf="!stockName.errors?.isValidStockName">Please enter a valid stock name</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <input type="number" matInput formControlName="buyQuantity">
+            </mat-form-field>
+        
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Buy Price</mat-label>
+                <input type="number" matInput formControlName="buyPrice">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Buy Date</mat-label>
+                <input type="date" matInput formControlName="buyDate">
+            </mat-form-field>
     
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Quantity</mat-label>
-            <input type="number" matInput formControlName="buyQuantity">
-        </mat-form-field>
-    
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Buy Price</mat-label>
-            <input type="number" matInput formControlName="buyPrice">
-        </mat-form-field>
-    
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Buy Date</mat-label>
-            <input type="date" matInput>
-        </mat-form-field>
-        <button>Submit</button>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Trade Type</mat-label>
+                <mat-select formControlName="tradeType">
+                    <mat-option *ngFor="let trade of tradeTypes" [value]="trade">{{trade}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Trade Type</mat-label>
+                <textarea matInput formControlName="tradeDescription"></textarea>
+            </mat-form-field>
+        </div>
+        <button [disabled]="!this.addTradeForm.valid" class="btn btn-primary">Submit</button>
     </form>
 </div>
