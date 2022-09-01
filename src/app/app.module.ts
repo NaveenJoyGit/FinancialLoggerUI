@@ -26,6 +26,7 @@ import { authInterceptorProviders } from './helpers/auth-interceptor';
 import { HomeComponent } from './components/home-components/home/home.component';
 import { AddTradeComponent } from './components/add-trade/add-trade.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewTradeComponent } from './components/view-trade/view-trade.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FinLogHeaderComponent,
     FinLogContainerCardComponent,
     HomeComponent,
-    AddTradeComponent
+    AddTradeComponent,
+    ViewTradeComponent
   ],
   imports: [
     BrowserModule,

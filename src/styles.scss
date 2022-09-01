@@ -6,7 +6,9 @@ body {
     margin: 0px;
     font-family: $common-font;
     font-size: $common-font-size;
-    background-color: $background-color;
+    background-image: url("./assets/fin-log-backdrop.jpeg");
+    background-blend-mode: luminosity;
+    // background-color: $background-color;
 }
 
 html,
@@ -17,6 +19,28 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        color: $button-hover-color;
+    }
+
+}
+
+button {
+    background-color: $contrast-color;
+    border: none;
+    padding: 0.75em;
+    border-radius: 0.5em;
+    color: black;
+
+    &:hover {
+        background-color: $button-hover-color;
+    }
 }
 
 
@@ -30,10 +54,14 @@ body {
 
 /* Border */
 .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: white;
+    color: $contrast-color;
 }
 
 /* Font color */
-input.mat-input-element {
-    color: white;
+input.mat-input-element, .mat-select {
+    color: $contrast-color;
+    .mat-select-value {
+        color: $contrast-color;
+    }
 }
+  

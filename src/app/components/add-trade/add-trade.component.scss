@@ -1,10 +1,14 @@
 .add-trade-form-container {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
+    width: 70%;
 }
 
 .input.ng-valid {
     background-color: blue;
+}
+
+.form-rows {
+    width: 100%;
+    .full-width {
+        width: 100%;
+    }
 }

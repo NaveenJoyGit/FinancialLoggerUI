@@ -1,13 +1,14 @@
 @import "../../themes.scss";
 .header-container {
-    background-color: $header-color;
+    background-color: $contrast-color;
     padding: 0.5em 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 3rem;
-    box-shadow: 0px 0px 2em black;
+    min-height: 5rem;
+    box-shadow: 0px -2px 1.5em black;
 }
+
 
 .logo-container {
     font-size: $sub-header-font-size;

@@ -26,7 +26,6 @@ export class UserAuthService {
   }
 
   login(user: FinancialLoggerUser): Observable<any> {
-
     return this.http.post(AUTH_API, user, httpOptions);
   }
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
 import { AddTradeResponse } from '../models/model';
-import { Constants } from '../models/constants'
+import { Constants } from '../models/Constants'
 
 
 @Injectable({

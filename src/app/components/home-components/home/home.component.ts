@@ -13,8 +13,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  viewTradeComponent() {
+  addTradeComponent() {
     this.router.navigateByUrl('/add-trade');
+  }
+
+  viewTradeComponent() {
+    this.router.navigateByUrl('/view-trades')
   }
 
 }
