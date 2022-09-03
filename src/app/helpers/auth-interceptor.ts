@@ -1,5 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { catchError, Observable, throwError } from "rxjs";
 import { TokenStorageService } from "../service/token-storage.service";
 
@@ -9,7 +10,7 @@ const TOKEN_HEADER_KEY = 'Authorization';
 
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private tokenService: TokenStorageService){ }
+    constructor(private tokenService: TokenStorageService, private router: Router){ }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         let authRequest = req;
@@ -21,6 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
            catchError((error: HttpErrorResponse) => {
                 if(error.status === 401) {
                     this.tokenService.removeToken();
+                    this.router.navigateByUrl('/login')
                 }
                 return throwError(() => new Error('Not Authorized'));
            }) 

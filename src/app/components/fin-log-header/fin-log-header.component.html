@@ -1,8 +1,8 @@
 <div class="header-container">
     <div class="logo-container"><a routerLink="/home">Logo</a></div>
     <div class="right-header-container">
-        <a class="login" routerLink="/login">Login</a>
-        <!-- <a *ngIf="isLoggedIn" class="login" (click)="logout()">Logout</a> -->
+        <a *ngIf="!isLoggedIn" class="login" routerLink="/login">Login</a>
+        <a *ngIf="isLoggedIn" class="login" (click)="logout()">Logout</a>
         <span>Sign-Up</span>
     </div>
 </div>

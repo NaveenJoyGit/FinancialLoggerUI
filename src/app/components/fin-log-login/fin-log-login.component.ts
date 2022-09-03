@@ -61,7 +61,6 @@ export class FinLogLoginComponent implements OnInit {
 
   successfullLogin(response:any) {
     this.tokenService.saveToken(response.responseData);
-    console.log(response)
     this.router.navigateByUrl('/home');
   }
  

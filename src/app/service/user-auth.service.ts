@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FinancialLoggerUser } from '../models/FinancialUser';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, Observable, throwError } from 'rxjs';
+import { TokenStorageService } from './token-storage.service';
 
 const AUTH_API = 'http://localhost:8080/api/v1/authenticate';
 const httpOptions = {
@@ -13,24 +14,33 @@ const httpOptions = {
 })
 export class UserAuthService {
 
-  private tokenSubject: BehaviorSubject<FinancialLoggerUser>;
-  public token: Observable<FinancialLoggerUser>;
+  private _loginSubject: BehaviorSubject<any> = new BehaviorSubject('loggedOut');
 
-  constructor(private http: HttpClient) {
-    this.tokenSubject = new BehaviorSubject<any>(localStorage.getItem('token') || {});
-    this.token = this.tokenSubject.asObservable();
-  }
+  loginSubscription$: Observable<any> = this._loginSubject.asObservable().pipe(distinctUntilChanged());
 
-  public get retrieveToken(): FinancialLoggerUser  {
-    return this.tokenSubject.value;
+  constructor(private http: HttpClient, private tokenService: TokenStorageService) {
   }
 
   login(user: FinancialLoggerUser): Observable<any> {
-    return this.http.post(AUTH_API, user, httpOptions);
+    let httpData = this.http.post(AUTH_API, user, httpOptions);
+    this.saveTokenSubject(httpData);
+    return httpData;
+  }
+
+  saveTokenSubject(httpData: Observable<any>) {
+    httpData.subscribe({
+      // Emits successful login value for authenticated users
+      next: data => this._loginSubject.next(data),
+      error: err => console.log(err)
+      
+    })
   }
 
   logout() {
-    localStorage.removeItem('token');
+    this.tokenService.removeToken();
+
+    // Emits a logged out string to subscribers implying the user is no longer authenticated
+    this._loginSubject.next('loggedOut');
   }
 
 }
