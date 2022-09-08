@@ -3,6 +3,6 @@
     <div class="right-header-container">
         <a *ngIf="!isLoggedIn" class="login" routerLink="/login">Login</a>
         <a *ngIf="isLoggedIn" class="login" (click)="logout()">Logout</a>
-        <span>Sign-Up</span>
+        <a *ngIf="!isLoggedIn" routerLink="/sign-up">Sign-Up</a>
     </div>
 </div>

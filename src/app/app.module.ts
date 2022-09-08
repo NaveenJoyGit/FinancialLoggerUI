@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http' 
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 //Material Library imports
 import { MatNativeDateModule } from '@angular/material/core';
@@ -27,6 +28,7 @@ import { HomeComponent } from './components/home-components/home/home.component'
 import { AddTradeComponent } from './components/add-trade/add-trade.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewTradeComponent } from './components/view-trade/view-trade.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { ViewTradeComponent } from './components/view-trade/view-trade.component
     FinLogContainerCardComponent,
     HomeComponent,
     AddTradeComponent,
-    ViewTradeComponent
+    ViewTradeComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { ViewTradeComponent } from './components/view-trade/view-trade.component
     MatRadioModule,
     MatButtonModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,
+    [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

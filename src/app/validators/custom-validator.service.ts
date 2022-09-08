@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { map, tap } from 'rxjs';
 import { NseDataService } from '../service/nse-data.service';
 
@@ -32,4 +33,30 @@ export class CustomValidatorService {
     }
   }
 
+  passwordValidator2(): ValidatorFn {
+    return (c: AbstractControl): { [key: string]: boolean } | null => {
+      const password = c.get('password');
+      const confirmPassword = c.get('confirmPassword');
+  
+      return password?.value === confirmPassword?.value ? null : { mismatch: true };
+    };
+  }
+ 
+
+  passwordValidator(group: FormGroup) {
+    
+      const password = group.get('password');
+      const confirmPassword = group.get('confirmPassword');
+  
+      return password?.value === confirmPassword?.value ? null : { mismatch: true };
+  }
+  
+
+}
+
+export class ConfirmValidParentMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    if(control === null || control.parent === null) return false;
+      return control.parent.invalid && control.touched;
+  }
 }

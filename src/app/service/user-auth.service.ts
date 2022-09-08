@@ -3,8 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FinancialLoggerUser } from '../models/FinancialUser';
 import { BehaviorSubject, distinctUntilChanged, Observable, throwError } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
+import { SignUpFormResponse } from '../models/model';
 
 const AUTH_API = 'http://localhost:8080/api/v1/authenticate';
+const REGISTER_USER_API = 'http://localhost:8080/api/v1/sign-up'
 const httpOptions = {
   headers: new HttpHeaders({'content-type': 'application/json'})
 }
@@ -25,6 +27,10 @@ export class UserAuthService {
     let httpData = this.http.post(AUTH_API, user, httpOptions);
     this.saveTokenSubject(httpData);
     return httpData;
+  }
+
+  registerUser(signUpResponse: SignUpFormResponse): Observable<any> {
+    return this.http.post(REGISTER_USER_API, signUpResponse, httpOptions);
   }
 
   saveTokenSubject(httpData: Observable<any>) {

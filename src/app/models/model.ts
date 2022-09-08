@@ -5,3 +5,10 @@ export interface AddTradeResponse {
     tradeType: string,
     tradeDescription: string
 } 
+
+export interface SignUpFormResponse {
+    userName: string,
+    firstName: string,
+    lastName: string,
+    password: string
+}

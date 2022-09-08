@@ -20,10 +20,14 @@ export class AuthInterceptor implements HttpInterceptor {
         } 
         return next.handle(req).pipe(
            catchError((error: HttpErrorResponse) => {
+                console.log(error)
                 if(error.status === 401) {
                     this.tokenService.removeToken();
                     this.router.navigateByUrl('/login')
+                    console.log('token removed')
                 }
+                console.log('STATUS ===> ' + error.status);
+                
                 return throwError(() => new Error('Not Authorized'));
            }) 
 
