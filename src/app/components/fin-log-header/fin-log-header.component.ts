@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, of } from 'rxjs';
 import { UserAuthService } from 'src/app/service/user-auth.service';
 
@@ -11,8 +12,10 @@ import { UserAuthService } from 'src/app/service/user-auth.service';
 export class FinLogHeaderComponent implements OnInit {
 
   isLoggedIn: boolean = false;
+  username: string = '';
 
-  constructor(private authService: UserAuthService, private router: Router) { }
+  constructor(private authService: UserAuthService, private router: Router,
+    private jwtService: JwtHelperService) { }
 
   ngOnInit(): void {
 
@@ -21,26 +24,30 @@ export class FinLogHeaderComponent implements OnInit {
      .subscribe({
         next: data => {
           if(data !== 'loggedOut') {
-            console.log(data)
-            console.log('sucess');
-            this.isLoggedIn = true
+            this.populateHeaderBooleans(data);
           } else {
-            console.log('What is the data now?? I am curiuous');
-            console.log(data)
-            this.isLoggedIn = false;
+            this.unauthorizeHeaders();
           }
         },
         error: err => {
-          console.log(err)
-          console.log('fails');
-
           this.isLoggedIn = false
         }
       })
   }
 
+  populateHeaderBooleans(data: any) {
+    let token = data.responseData;
+    this.isLoggedIn = true;
+    this.username = this.jwtService.decodeToken(token).sub;
+
+  }
+
+  unauthorizeHeaders() {
+    this.isLoggedIn = false;
+    this.username = '';
+  }
+
   logout() {
-    console.log('Logout method called...')
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }

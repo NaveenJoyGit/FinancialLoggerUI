@@ -12,3 +12,18 @@ export interface SignUpFormResponse {
     lastName: string,
     password: string
 }
+
+export interface CommonResponse<T> {
+    responseCode: string
+    responseMessage: string
+    responseData: T
+  }
+
+export interface ViewTrades {
+    stockName: string,
+    buyPrice: string,
+    currentPrice: string,
+    percentageChange: string,
+    tradeStatus: string,
+    tradeValue: string
+}

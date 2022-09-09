@@ -44,7 +44,6 @@ export class UserAuthService {
 
   logout() {
     this.tokenService.removeToken();
-
     // Emits a logged out string to subscribers implying the user is no longer authenticated
     this._loginSubject.next('loggedOut');
   }
