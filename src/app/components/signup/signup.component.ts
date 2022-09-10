@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SignUpFormResponse } from 'src/app/models/model';
+import { CommonResponse, SignUpFormResponse } from 'src/app/models/model';
 import { UserAuthService } from 'src/app/service/user-auth.service';
 import { ConfirmValidParentMatcher, CustomValidatorService } from 'src/app/validators/custom-validator.service';
 
@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   signUpForm!: FormGroup
   signUpResponse!: SignUpFormResponse
+  usernameInvalidMessage: string = '';
 
   constructor(private formBuilder: FormBuilder, 
     private customValidator: CustomValidatorService,
@@ -77,10 +78,15 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  reroute(data: any) {
-    console.log(data);
-    console.log('REGISTER SUCESS')
-    this.router.navigateByUrl('/login')
+  reroute(data: CommonResponse<any>) {
+    if(data.responseCode === '4001') {
+      this.usernameInvalidMessage = data.responseMessage;
+      this.signUpForm.controls['username'].setErrors({invalid: true});
+    } else if (data.responseCode === '2001') {
+      console.log(data);
+      console.log('REGISTER SUCESS')
+      this.router.navigateByUrl('/login')
+    }
   }
 
 }

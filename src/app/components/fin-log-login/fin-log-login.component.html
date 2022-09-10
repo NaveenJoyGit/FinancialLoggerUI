@@ -1,21 +1,22 @@
-<app-fin-log-container-card class="login-container-card" [styleObj]="cardStyle">
-    <div class="login-container">
-        <div class="login-header">
-            Login
-        </div>
-        <div class="form-container">
-            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-                <div class="input-label-container">
-                    <div>username</div>
-                    <input class="text-input" type="text" formControlName="username">
-                </div>
-                <div class="input-label-container">
-                    <div>password</div>
-                    <input class="text-input" type="password" formControlName="password">
-                </div>
-                <app-fin-log-button class="button">Login</app-fin-log-button>
-            </form>
-        </div>
+<div class="container card p-4 mt-4 login-forms-common-class">
+    <div class="login-common-header">
+        Login
     </div>
-</app-fin-log-container-card>
-{{text}}
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <div class="row">
+            <mat-form-field class="col full-width" appearance="outline">
+                <mat-label>username</mat-label>
+                <input matInput formControlName="username">
+                <mat-error>Please enter a valid user name</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="col full-width" appearance="outline">
+                <mat-label>password</mat-label>
+                <input matInput type="password" formControlName="password">
+                <mat-error>Please enter a valid password</mat-error>
+            </mat-form-field>
+        </div>
+        <button type="submit" [attr.disabled]="!loginForm.valid ? true : null" class="button">Login</button>
+    </form>
+</div>

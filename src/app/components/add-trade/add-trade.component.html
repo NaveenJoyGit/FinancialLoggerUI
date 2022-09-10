@@ -1,5 +1,8 @@
 <div class="container card mt-5 add-trade-form-container">
     <form [formGroup]="addTradeForm" (ngSubmit)="onFormSubmit()" class="form-container p-3">
+        <div *ngIf="showError" class="alert alert-danger" role="alert">
+            {{errorMessage}}
+        </div>
         <div class="row form-rows">
             <mat-form-field class="col full-width" appearance="outline">
                 <mat-label>Share Name</mat-label>

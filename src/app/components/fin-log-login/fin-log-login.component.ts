@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FinancialLoggerUser } from 'src/app/models/FinancialUser';
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { UserAuthService } from 'src/app/service/user-auth.service';
 import { first } from 'rxjs';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
@@ -17,10 +17,7 @@ export class FinLogLoginComponent implements OnInit {
 
   cardStyle: any;
   text:any;
-  loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
-  })
+  loginForm!: FormGroup
 
   user: FinancialLoggerUser = {
     username: '',
@@ -28,7 +25,8 @@ export class FinLogLoginComponent implements OnInit {
   };
 
   constructor(private authService: UserAuthService, 
-    private tokenService: TokenStorageService, private router: Router) { }
+    private tokenService: TokenStorageService, private router: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.intializeStyle();
@@ -36,6 +34,16 @@ export class FinLogLoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.router.navigateByUrl('/home')
     }
+    
+
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+
+    console.log(this.loginForm.valid);
+    
+
   }
   
   intializeStyle() {
@@ -47,9 +55,19 @@ export class FinLogLoginComponent implements OnInit {
     }
   }
 
+  get username() {
+    return this.loginForm.controls['username'].value;
+  }
+
+  get password() {
+    return this.loginForm.controls['password'].value;
+  }
+
   login(form:any) {
-    this.user.username = form.username;
-    this.user.password = form.password;
+    console.log('login btn clicked');
+    
+    this.user.username = this.username
+    this.user.password = this.password;
     this.authService.login(this.user).pipe(first())
     .subscribe(
       {

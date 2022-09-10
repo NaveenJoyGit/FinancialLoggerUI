@@ -18,6 +18,8 @@ export class AddTradeComponent implements OnInit {
   addTradeResponse!: AddTradeResponse
   tradeTypes: any;
   subscription: Subscription = new Subscription();
+  showError: boolean = false;
+  errorMessage: string = '';
 
   constructor(private formBuilder: FormBuilder,
     private customValidator: CustomValidatorService,
@@ -107,8 +109,13 @@ export class AddTradeComponent implements OnInit {
     console.log(this.addTradeResponse);
     this.tradeService.addTrade(this.addTradeResponse).subscribe({
       next: data => {
-        console.log(data.responseMessage)
-        this.router.navigateByUrl('/home')
+        if(data.responseCode === '2001') {
+          console.log(data.responseMessage)
+          this.router.navigateByUrl('/home')
+        } else if (data.responseCode === '4001') {
+          this.errorMessage = data.responseMessage;
+          this.showError = true;
+        }
       },
       error: err => console.log(err)
     });

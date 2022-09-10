@@ -1,21 +1,28 @@
-<div class="container">
+<div class="container card p-4 mt-4 login-forms-common-class">
+    <div class="login-common-header">
+        Signu Up
+    </div>
     <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-        <mat-form-field class="col full-width" appearance="outline">
-            <mat-label>User name</mat-label>
-            <input matInput formControlName="username">
-            <mat-error>Please enter a valid stock name</mat-error>
-        </mat-form-field>
-        <mat-form-field class="col full-width" appearance="outline">
-            <mat-label>First name</mat-label>
-            <input matInput formControlName="firstName">
-            <mat-error>Please enter a valid stock name</mat-error>
-        </mat-form-field>
-        <mat-form-field class="col full-width" appearance="outline">
-            <mat-label>Last name</mat-label>
-            <input matInput formControlName="lastName">
-            <mat-error>Please enter a valid stock name</mat-error>
-        </mat-form-field>
-        <div formGroupName="passwordForm">
+        <div class="row">
+            <mat-form-field class="col full-width" appearance="outline">
+                <mat-label>User name</mat-label>
+                <input matInput formControlName="username">
+                <mat-error>{{usernameInvalidMessage}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="col full-width" appearance="outline">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstName">
+                <mat-error>Please enter a valid stock name</mat-error>
+            </mat-form-field>
+            <mat-form-field class="col full-width" appearance="outline">
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastName">
+                <mat-error>Please enter a valid stock name</mat-error>
+            </mat-form-field>
+        </div>
+        <div formGroupName="passwordForm" class="row">
             <mat-form-field class="col full-width" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput formControlName="password"type="password">
@@ -29,6 +36,6 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <app-fin-log-button class="button">Sign Up</app-fin-log-button>
+        <button class="button" [disabled]="!signUpForm.valid">Sign Up</button>
     </form>
 </div>

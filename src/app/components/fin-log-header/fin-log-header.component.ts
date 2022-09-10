@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, of } from 'rxjs';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserAuthService } from 'src/app/service/user-auth.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class FinLogHeaderComponent implements OnInit {
   username: string = '';
 
   constructor(private authService: UserAuthService, private router: Router,
-    private jwtService: JwtHelperService) { }
+    private jwtService: JwtHelperService, private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
 
@@ -45,6 +46,8 @@ export class FinLogHeaderComponent implements OnInit {
   unauthorizeHeaders() {
     this.isLoggedIn = false;
     this.username = '';
+    this.tokenService.removeToken();
+    this.router.navigateByUrl('/login');
   }
 
   logout() {

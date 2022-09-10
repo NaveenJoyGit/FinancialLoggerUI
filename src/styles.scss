@@ -27,6 +27,7 @@ a {
 
     &:hover {
         color: $button-hover-color;
+        cursor: pointer;
     }
 
 }
@@ -38,8 +39,16 @@ button {
     border-radius: 0.5em;
     color: black;
 
+    &:disabled {
+        opacity: 20%;
+        &:hover {
+            cursor: no-drop;
+        }
+    }
+
     &:hover {
         background-color: $button-hover-color;
+        cursor: pointer;
     }
 }
 
@@ -57,11 +66,28 @@ button {
     color: $contrast-color;
 }
 
+.mat-icon {
+    vertical-align: middle;
+}
+
 /* Font color */
-input.mat-input-element, .mat-select {
+input.mat-input-element,
+.mat-select {
     color: $contrast-color;
+
     .mat-select-value {
         color: $contrast-color;
     }
 }
-  
+
+.login-forms-common-class {
+    width: 50%;
+}
+
+.login-common-header {
+    font-size: $sub-header-font-size;
+}
+
+.card {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

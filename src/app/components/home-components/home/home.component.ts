@@ -10,18 +10,15 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, private jwtService: JwtHelperService, 
+  constructor(private router: Router,
     private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
     let token = this.tokenService.getToken();
-    if(token == null){
-     token = ''
-     this.router.navigateByUrl('/login');
+    if (token == null) {
+      token = ''
+      this.router.navigateByUrl('/login');
     }
-    console.log('Decoded Token :');
-      
-    console.log(this.jwtService.decodeToken(token));
   }
 
   addTradeComponent() {

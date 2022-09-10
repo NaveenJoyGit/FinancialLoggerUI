@@ -1,5 +1,5 @@
-<div class="container">
-    <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+<div class="container pt-4">
+  <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
     
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -21,13 +21,13 @@
           <th mat-header-cell *matHeaderCellDef> CMP </th>
           <td mat-cell *matCellDef="let element"> {{element.currentPrice}} </td>
         </ng-container>
-      
+        
         <!-- Symbol Column -->
         <ng-container matColumnDef="percentageChange">
           <th mat-header-cell *matHeaderCellDef> Percentage Change </th>
           <td mat-cell *matCellDef="let element"> {{element.percentageChange}} </td>
         </ng-container>
-
+        
         <ng-container matColumnDef="tradeStatus">
           <th mat-header-cell *matHeaderCellDef> Staus </th>
           <td mat-cell *matCellDef="let element"> {{element.tradeStatus}} </td>
@@ -37,8 +37,15 @@
           <th mat-header-cell *matHeaderCellDef> Trade Value </th>
           <td mat-cell *matCellDef="let element"> {{element.tradeValue}} </td>
         </ng-container>
-      
+        
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-</div>
+      <table>
+        <tr *ngIf="!viewTradeTable.length">
+          <td style="text-align: center;" class="alert alert-dark p-3" [attr.colspan]="displayedColumns.length">
+            No Records Found!
+          </td>
+        </tr>
+      </table>
+    </div>

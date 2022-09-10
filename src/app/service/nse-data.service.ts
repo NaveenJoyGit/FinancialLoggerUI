@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
-import { AddTradeResponse } from '../models/model';
+import { AddTradeResponse, CommonResponse } from '../models/model';
 import { Constants } from '../models/Constants'
 
 
@@ -27,8 +27,8 @@ export class NseDataService {
     })
   }
 
-  addTrade(addTradeResponse: AddTradeResponse): Observable<any> {
-    return this.http.post(Constants.ADD_TRADE_API, addTradeResponse);
+  addTrade(addTradeResponse: AddTradeResponse): Observable<CommonResponse<any>> {
+    return this.http.post<CommonResponse<any>>(Constants.ADD_TRADE_API, addTradeResponse);
   }
 
 }
