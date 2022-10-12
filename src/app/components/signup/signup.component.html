@@ -1,13 +1,13 @@
 <div class="container card p-4 mt-4 login-forms-common-class">
     <div class="login-common-header">
-        Signu Up
+        Sign Up
     </div>
     <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <div class="row">
             <mat-form-field class="col full-width" appearance="outline">
                 <mat-label>User name</mat-label>
                 <input matInput formControlName="username">
-                <mat-error>{{usernameInvalidMessage}}</mat-error>
+                <mat-error>Username Already Taken</mat-error>
             </mat-form-field>
         </div>
         <div class="row">
