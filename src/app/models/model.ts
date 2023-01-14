@@ -23,7 +23,7 @@ export interface ViewTrades {
     stockName: string,
     buyPrice: string,
     currentPrice: string,
-    percentageChange: string,
+    profitOrLoss: string,
     tradeStatus: string,
     tradeValue: string
 }

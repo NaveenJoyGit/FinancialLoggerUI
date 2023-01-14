@@ -25,9 +25,13 @@ export class FinLogHeaderComponent implements OnInit {
      .subscribe({
         next: data => {
           if(data !== 'loggedOut') {
-            this.populateHeaderBooleans(data);
+            this.populateHeaderBooleans(data.responseData);
           } else {
-            this.unauthorizeHeaders();
+              if(this.tokenService.getToken()) {
+                this.populateHeaderBooleans(this.tokenService.getToken());
+              }
+              else
+                this.unauthorizeHeaders();
           }
         },
         error: err => {
@@ -37,7 +41,7 @@ export class FinLogHeaderComponent implements OnInit {
   }
 
   populateHeaderBooleans(data: any) {
-    let token = data.responseData;
+    let token = data;
     this.isLoggedIn = true;
     this.username = this.jwtService.decodeToken(token).sub;
 

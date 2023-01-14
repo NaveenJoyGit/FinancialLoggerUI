@@ -35,7 +35,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ViewTradeComponent implements OnInit {
 
   viewTradeTable: ViewTrades[] = [];
-  displayedColumns: string[] = ['stockName', 'buyPrice', 'currentPrice', 'percentageChange', 'tradeStatus', 'tradeValue'];
+  displayedColumns: string[] = ['stockName', 'buyPrice', 'currentPrice', 'profitOrLoss', 'tradeStatus', 'tradeValue'];
   datasource: any;
 
   constructor(private tradeService: TradeDataService) { }

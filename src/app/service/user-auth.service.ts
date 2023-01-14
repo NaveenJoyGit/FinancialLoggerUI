@@ -18,7 +18,7 @@ export class UserAuthService {
 
   private _loginSubject: BehaviorSubject<any> = new BehaviorSubject('loggedOut');
 
-  loginSubscription$: Observable<any> = this._loginSubject.asObservable().pipe(distinctUntilChanged());
+  loginSubscription$: Observable<any> = this._loginSubject.asObservable();
 
   constructor(private http: HttpClient, private tokenService: TokenStorageService) {
   }

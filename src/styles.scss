@@ -80,6 +80,18 @@ input.mat-input-element,
     }
 }
 
+.mat-table {
+    background-color: rgb(230, 232, 212);
+    .mat-header-cell {
+        color: rgb(38, 41, 27);
+        font-size: 18px;
+    }
+
+    .mat-cell {
+        color: rgb(48, 49, 22);
+    }
+}
+
 .login-forms-common-class {
     width: 50%;
 }
